@@ -178,10 +178,10 @@ pre {
     top: 50%;
     width: 50%;
     height: auto;
-    left: -400px;
+    right: -60%;
     padding-top: 10%;
-/*    margin-top: 150px;*/
-    z-index: 10;
+/*    margin-top: 150px;
+*/    z-index: 10;
     -moz-transform: translate(0%, -50%);
     -o-transform: translate(0%, -50%);
     -ms-transform: translate(0%, -50%);
@@ -209,8 +209,7 @@ pre {
 }
 
 #about div {
-    width: 60%;
-    height: 50%;
+    width: 80%;
 }
 
 #about div h3 {
@@ -222,8 +221,8 @@ pre {
     margin-bottom: 10px;
 }
 
-#about .open {
-    left: 0;
+#about.open {
+    right: 20%;
 }
 
 #content {
@@ -404,8 +403,12 @@ pre {
     }
     
     #about {
-        width: 100%;
-        left: -120%;
+        width: 90%;
+        right: -110%;
+    }
+
+    #about.open {
+        right: 0%;
     }
 }
 

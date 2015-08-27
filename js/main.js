@@ -167,7 +167,7 @@
 							    for(var i = 0; i < array.length; i++) {
 							        // Create the list item:
 							        var link = document.createElement('a');
-							        link.href = 'assets/attachments/'+array[i].replace(/\"/g, "");
+							        link.href = '../img/'+array[i].replace(/\"/g, "");
 							        link.target = '_blank';
 							        var item = document.createElement('li');
 
@@ -220,17 +220,17 @@
 				 		itemIndex = jQuery.inArray(p, psArray);
 				 		itemTime = moment(""+site.messages[itemIndex].DATE+" "+site.messages[itemIndex].TIME+"");
 
-				 		var months = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
-				 		var selectedMonthName = months[itemTime.month()];
+				 		// var months = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
+				 		// var selectedMonthName = months[itemTime.month()];
 
-				 		$('#date').html(selectedMonthName +" "+ itemTime.date() +", "+ itemTime.year() +"");
-				 		if(itemTime.hour() >= 12){
-				 			period = 'pm';
-				 		}else {
-				 			period = 'am';
-				 		}
+				 		// $('#date').html(selectedMonthName +" "+ itemTime.date() +", "+ itemTime.year() +"");
+				 		// if(itemTime.hour() >= 12){
+				 		// 	period = 'pm';
+				 		// }else {
+				 		// 	period = 'am';
+				 		// }
 
-				 		$('#time').html(((itemTime.hour() + 11) % 12 + 1) +":"+('0' + itemTime.minutes()).slice(-2) +" "+period+"");
+				 		// $('#time').html(((itemTime.hour() + 11) % 12 + 1) +":"+('0' + itemTime.minutes()).slice(-2) +" "+period+"");
 			        if (previousWaypoint) {
 			          $(previousWaypoint.element).addClass('np-previous')
 			        }
@@ -281,11 +281,11 @@
 	about = {
 		showAbout: function(){
 			$('#about').addClass('open');
-			$('.wrap').addClass('hide');
+			// $('.wrap').addClass('hide');
 		},
 		closeAbout: function(){
 			$('#about').removeClass('open');
-			$('.wrap').removeClass('hide');
+			// $('.wrap').removeClass('hide');
 		}
 	};
 

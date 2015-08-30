@@ -19,7 +19,6 @@
 			site.miscFunctions();   
 		},
 		probe: function(){
-			$('#logo').attr('src','assets/img/logo.svg');
 			var position;
 
 			function loaded () {
@@ -87,7 +86,7 @@
 				}else {
 					FB.ui({
 					  method: 'share',
-					  href: 'http://beforewemet.com/',
+					  href: 'http://textingwithcancer.com/',
 					}, function(response){});
 					return false;
 				}

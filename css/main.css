@@ -237,8 +237,23 @@ a {
     width: 100%;
 }
 
+#content div {
+
+}
+
+#content div .assets {
+
+}
+
 #content::after {
 /* make the bottom fade out */
+}
+
+#date, #time {
+    width: 50%;
+    text-align: center;
+    font-size: 10px;
+    color: #505050;
 }
 
 .text {
@@ -280,6 +295,8 @@ a {
     color: #fff;
     float: left;
 }
+
+
 
 .wrap {
   -webkit-transition: all 250ms ease-out;
@@ -417,6 +434,10 @@ a {
 
     #about.open {
         right: 0%;
+    }
+
+    #content div .assets {
+    
     }
 }
 

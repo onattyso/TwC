@@ -15,6 +15,7 @@
 		messages:'',
 		dayCount: '',
 		init: function(){
+			console.log('test');
 			site.spreadsheet();
 			site.miscFunctions();   
 		},
@@ -56,23 +57,17 @@
 			$('.wrapper>div').last().css('padding-bottom', '25px');
 		},
 		spreadsheet: function(){
-			$.getJSON("assets/js/messages.json", function(json) {
+			$.getJSON("js/messages.json", function(json) {
 			    // console.log(json); // this will show the info it in firebug console
 				site.messages = json;
 				site.buildFeed(json);
 				site.probe();
+				console.log('go');
 			});
 		},
 
-//Unneeded...should be whatever info is available
-		// userTime: function(){
-		// 	var newDate = moment().year(2010);
-		// 	return newDate.unix();
-		// },
-
 		buildFeed: function(data){
 			wrapper = document.getElementsByClassName('wrapper')[0];
-			current_miliseconds = site.userTime();
 			var messages = site.messages;
 
 			// our variable holding starting index of this "page"
@@ -108,49 +103,41 @@
 				// 3) join the array into a single string and set it as a HTML content of list
 
 				$.each(messages.slice(index, index + messages.length), function(index, val) {
-
-					var item_date = moment(""+val.DATE+" "+val.TIME+"");
-					item_miliseconds = item_date.unix();
-
-					if(current_miliseconds >= item_miliseconds ){
+					console.log(index);
 						amount++;
 						parseMessage();
-						last = $('.message').last();
-						lastDate = messages[last.index()];
 						if(author != 'none'){
-							$('.wrapper').append('<div class="'+side+' '+type+' message"><h2>'+subject+'</h2><p>'+copy+'</p></div>');
+							$('.wrapper').append('<div class="'+side+' '+type+' text"><h2>'+subject+'</h2><p>'+copy+'</p></div>');
 							$('.message').last().children('p').linkify();
-							
-							if(last.index()>0){
-								if(lastDate.DATE != val.DATE){
-								 	site.dayCount++;
-									newLast = $('div.message').last();
-									newLast.prepend('<span><img src="assets/img/days/day'+(site.dayCount+1)+'.svg" alt="day1" /></span>');
-								}
-							}
 						}
-						if(item_attachments && val.SUBJECT != "gchat" && author != 'none'){
-							item = wrapper.lastChild.getElementsByTagName("p")[0];
-							item.appendChild(item_attachments);
-						}
-
-					}
 					function parseMessage(){
 						author();
 						copy();
-						attachments();
+						subject();
+						// attachments();
 					};
-						function author(){
+					function author(){
 						// set author per item
 						if(val.AUTHOR.substring(0,2) == 'me'){
 							author = val.AUTHOR.substring(0,2);
-							side = 'right';
-						}else if(val.AUTHOR.substring(0,8) == 'positive' || 'negative'){
+							side = 'me';
+						}else if(val.AUTHOR.substring(0,8) == 'positive'){
 							author = val.AUTHOR.substring(0,8);
-							side = 'left'
+							side = 'optimism'
+						}else if(val.AUTHOR.substring(0,8) == 'negative'){
+							author = val.AUTHOR.substring(0,8);
+							side = 'pessimism'
+						}
+					};
+					function subject(){
+						// use subject to determine if message is ghat or email
+						if(val.SUBJECT == "gchat"){
+							// if gchat, set subject to nothing to know it's gchat
+							subject = '';
+							type = 'gchat';
 						}else{
-							author = 'none';
-							side = 'middle someone'
+							subject = ''+val.SUBJECT+'';
+							type = '';
 						}
 					};
 					function attachments(){
@@ -244,7 +231,7 @@
 			});
   			document.body.scrollTop = document.documentElement.scrollTop = 0;
 			$('html,body').css('overflow-y','auto');
-			$('#header').css('height','75%');
+			// $('#header').css('height','75%');
 			$('footer').css('height','auto');
 			$('.loading').animate({opacity: 0});
 		},

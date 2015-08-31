@@ -8,7 +8,7 @@
 header('Content-type: application/json');
 
 // Set your CSV feed
-$feed = 'https://docs.google.com/spreadsheets/d/15mYIvPOrBEHwRGyVnazZor0BF08-ENp1mfeyvpuYuII/export?format=csv';
+$feed = 'https://docs.google.com/spreadsheets/d/15mYIvPOrBEHwRGyVnazZor0BF08-ENp1mfeyvpuYuII/pub?gid=0&single=true&output=csv';
 
 // Arrays we'll use later
 $keys = array();

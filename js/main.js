@@ -107,15 +107,21 @@
 						amount++;
 						parseMessage();
 						if(author != 'none'){
-							$('.wrapper').append('<div class="'+side+' '+type+' text"><h2>'+subject+'</h2><p>'+copy+'</p></div>');
+							$('.wrapper').append('<div class="'+side+' '+type+' text"><p>'+copy+'</p></div>');
 							$('.message').last().children('p').linkify();
 						}
 					function parseMessage(){
+						date();
 						author();
 						copy();
-						subject();
-						// attachments();
+						time();
+						assets();
 					};
+					function date(){
+						if(val.DATE == ) {
+						//if the date value is the same as the last one, then ignore. Otherwise, print the date #date
+					}
+					}
 					function author(){
 						// set author per item
 						if(val.AUTHOR.substring(0,2) == 'me'){
@@ -129,22 +135,11 @@
 							side = 'pessimism'
 						}
 					};
-					function subject(){
-						// use subject to determine if message is ghat or email
-						if(val.SUBJECT == "gchat"){
-							// if gchat, set subject to nothing to know it's gchat
-							subject = '';
-							type = 'gchat';
+					function assets(){
+						if(val.ASSETS == ''){
+							item_assets = false;
 						}else{
-							subject = ''+val.SUBJECT+'';
-							type = '';
-						}
-					};
-					function attachments(){
-						if(val.ATTACHMENTS == ''){
-							item_attachments = false;
-						}else{
-							item_attachments_raw = JSON.stringify(val.ATTACHMENTS).split(/[\\]n/g), parts = [];
+							item_assets_raw = JSON.stringify(val.ASSETS).split(/[\\]n/g), parts = [];
 
 							function makeUL(array) {
 							    // Create the list element:
@@ -166,7 +161,7 @@
 							    // Finally, return the constructed list:
 							    return list;
 							}
-							item_attachments = makeUL(item_attachments_raw);
+							item_assets = makeUL(item_assets_raw);
 						}
 					}
 					function copy(){

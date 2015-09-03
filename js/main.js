@@ -107,7 +107,7 @@
 						amount++;
 						parseMessage();
 						if(author != 'none'){
-							$('.wrapper').append('<div class="'+side+' '+type+' text"><p>'+copy+'</p></div>');
+							$('.wrapper').append('<div class="'+side+' text"><p>'+copy+'</p></div>');
 							$('.message').last().children('p').linkify();
 						}
 					function parseMessage(){
@@ -118,7 +118,8 @@
 						assets();
 					};
 					function date(){
-						if(val.DATE == ) {
+						if(val.DATE == '') {
+							console.log(val.DATE)
 						//if the date value is the same as the last one, then ignore. Otherwise, print the date #date
 					}
 					}
@@ -163,6 +164,10 @@
 							}
 							item_assets = makeUL(item_assets_raw);
 						}
+					}
+					function time() {
+						timeRaw = JSON.stringify(val.TIME).replace(/[\\]n/g, '<br/>').replace(/\\/g, "");
+						time = timeRaw.substring(1, timeRaw.length-1);
 					}
 					function copy(){
 						copyRaw = JSON.stringify(val.COPY).replace(/[\\]n/g, '<br/>').replace(/\\/g, "");

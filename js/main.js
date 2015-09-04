@@ -1,290 +1,96 @@
-// Browser detection for when you get desparate. A measure of last resort.
-// http://rog.ie/post/9089341529/html5boilerplatejs
-// sample CSS: html[data-useragent*='Chrome/13.0'] { ... }
-//
-// var b = document.documentElement;
-// b.setAttribute('data-useragent',  navigator.userAgent);
-// b.setAttribute('data-platform', navigator.platform);
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 
+<!-- 
 
-// remap jQuery to $
-(function($){
-	site = {
-		emails: $('.wrapper>div'),
-		paddingTop:window.innerHeight,
-		messages:'',
-		dayCount: '',
-		init: function(){
-			console.log('test');
-			site.spreadsheet();
-			site.miscFunctions();   
-		},
-		probe: function(){
-			var position;
+Inspired by BeforeWeMet.com
 
-			function loaded () {
-				document.addEventListener("touchmove", ScrollStart, false);
-				document.addEventListener("scroll", Scroll, false);
+Many thanks to Laith Azzam (http://laithazzam.com)
 
-				function ScrollStart() {
-					updateTime();
-					scrollValue = $(window).scrollTop();
-				}
+-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Texting with Cancer</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-				function Scroll() {
-					updateTime();
-					scrollValue = $(window).scrollTop();
-					if(scrollValue >= window.innerHeight/2){
-						$('#aboutImg').css('display','block');
-					}
-					else {
-						$('#aboutImg').css('display','hidden');
-					}
-				}
-			}
-			function updateTime(){
-			};
-			loaded();
-		},
-		resize: function(){
-		},
-		paddingBottom: function(){
-			$('.message').css('padding-bottom','0px');
-			paddingBottom = ( site.paddingTop-$('.wrapper>div').last().height() )/2;
-			if(paddingBottom <= 50){
-				paddingBottom = 100
-			}
-			$('.wrapper>div').last().css('padding-bottom', '25px');
-		},
-		spreadsheet: function(){
-			$.getJSON("js/messages.json", function(json) {
-			    // console.log(json); // this will show the info it in firebug console
-				site.messages = json;
-				site.buildFeed(json);
-				site.probe();
-				console.log('go');
-			});
-		},
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-		buildFeed: function(data){
-			wrapper = document.getElementsByClassName('wrapper')[0];
-			var messages = site.messages;
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/jquery-ui.css">
+        <link rel="stylesheet" href="css/dragdealer.css">
 
-			// our variable holding starting index of this "page"
-			var index = 0;
+        <script src="js/vendor/modernizr-2.7.1.dev.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
 
-			displayNext();
+    <div id="about">
+        <div>
+            <h3>On July 31st, 2015 I was diagnosed with breast cancer.<h3>
 
-			$("#facebook").click(function() {
-				if(navigator.userAgent.match('CriOS')){
-					console.log('ios Chrome');
-				}else {
-					FB.ui({
-					  method: 'share',
-					  href: 'http://textingwithcancer.com/',
-					}, function(response){});
-					return false;
-				}
-			});
+            <p>Good news: I’m going to be fine.</br>
+            Bad news: It’s going to suck. Probably.</p>
 
-			function displayNext() {
-			console.log($('.message').length, site.messages.length);
-			if($('.message').length < site.messages.length){
-				Waypoint.destroyAll()
-				// get the list element
-				var amount = 0;
-				var list = $('.wrapper');
+            <p>Texting with Cancer is the mental conversation with optimism and pessimism as I deal with cancer and life.</p>
 
-				// get index stored as a data on the list, if it doesn't exist then assign 0
-				var index = list.data('index') % messages.length || 0;
+            <p>"It's our choice, whether to hate something in our lives or to love every moment of them, even the parts that bring us pain. 'At every moment, we are volunteers.'”</br>
+            <i>- <a href="http://www.gq.com/story/stephen-colbert-gq-cover-story" target="_blank">Joel Lovell on Stephen Colbert</a></i></p>
 
-				// 1) get 20 elements from array - starting from index, using Array.slice()
-				// 2) map them to array of li strings
-				// 3) join the array into a single string and set it as a HTML content of list
+            <p>Inspired by <a href="http://beforewemet.com" target="_blank">Before We Met</a>
+            </br>With a lot of help from <a href="http://laithazzam.com/" target="_blank">Laith Azzam</a>
 
-				$.each(messages.slice(index, index + messages.length), function(index, val) {
-					console.log(index);
-						amount++;
-						parseMessage();
-						if(author != 'none'){
-							$('.wrapper').append('<div class="'+side+' text"><p>'+copy+'</p></div>');
-							$('.message').last().children('p').linkify();
-						}
-					function parseMessage(){
-						date();
-						author();
-						copy();
-						time();
-						assets();
-					};
-					function date(){
-						if(val.DATE == '') {
-							console.log(val.DATE)
-						//if the date value is the same as the last one, then ignore. Otherwise, print the date #date
-					}
-					}
-					function author(){
-						// set author per item
-						if(val.AUTHOR.substring(0,2) == 'me'){
-							author = val.AUTHOR.substring(0,2);
-							side = 'me';
-						}else if(val.AUTHOR.substring(0,8) == 'positive'){
-							author = val.AUTHOR.substring(0,8);
-							side = 'optimism'
-						}else if(val.AUTHOR.substring(0,8) == 'negative'){
-							author = val.AUTHOR.substring(0,8);
-							side = 'pessimism'
-						}
-					};
-					function assets(){
-						if(val.ASSETS == ''){
-							item_assets = false;
-						}else{
-							item_assets_raw = JSON.stringify(val.ASSETS).split(/[\\]n/g), parts = [];
+            <p>Thanks to my family who are making this way, way easier to deal with.</br>
+            Thanks to my friends who put up with my cancer jokes. (Is cancer contagious?)</p>
 
-							function makeUL(array) {
-							    // Create the list element:
-							    var list = document.createElement('ul');
+            <p>And thanks, art + tech community, for making me feel alive.</p>
 
-							    for(var i = 0; i < array.length; i++) {
-							        // Create the list item:
-							        var link = document.createElement('a');
-							        link.href = '../img/'+array[i].replace(/\"/g, "");
-							        link.target = '_blank';
-							        var item = document.createElement('li');
+            <p>Love,</br>
+            <a href="http://onattyso.com" target="_blank">Natalie Sun</a></p>
+        </div>
+    </div>
 
-							        // Set its contents:
-							        item.appendChild(link).appendChild(document.createTextNode(array[i].replace(/\"/g, "")));
+    <div id="header">
+        <div id="back"> <  Back</div>
+        <div id="details">About</div>
+        <div id="contact">Texting with Cancer</div>
+    </div>
 
-							        // Add it to the list:
-							        list.appendChild(item);
-							    }
-							    // Finally, return the constructed list:
-							    return list;
-							}
-							item_assets = makeUL(item_assets_raw);
-						}
-					}
-					function time() {
-						timeRaw = JSON.stringify(val.TIME).replace(/[\\]n/g, '<br/>').replace(/\\/g, "");
-						time = timeRaw.substring(1, timeRaw.length-1);
-					}
-					function copy(){
-						copyRaw = JSON.stringify(val.COPY).replace(/[\\]n/g, '<br/>').replace(/\\/g, "");
-						copy = copyRaw.substring(1, copyRaw.length-1);
-					};
+    <div class="all">
+        <div id="content" class="wrapper">
+            <div class="loading">
+                Loading text history...
+            </div>
+        </div>
+    </div>
 
-				});
-				list.data('index', parseInt(index) + parseInt(amount));
-				if(amount > 0 ){
-					site.postBuild();
-				}
-			}
-		}
-		},
-		postBuild: function(){
-			ps = $('.message').children('p');
-        	psArray = [];
-        	for (i = 0; i < ps.length; i++) { 
-			    psArray.push(ps[i]);
-			}
-			site.paddingBottom();
-			$.each(['message'], function(i, classname) {
-			  var $elements = $('.' + classname);
-			  console.log(classname);
-			  $elements.each(function() {
-			    new Waypoint({
-			      element: this,
-			      handler: function(direction) {
-			        var previousWaypoint = this.previous()
-			        var nextWaypoint = this.next()
-
-			        $elements.removeClass('np-previous np-current np-next')
-			        $(this.element).addClass('np-current')
-			        	item = $(this.element);
-			        	p = item.children('p').last()[0];
-				 		itemIndex = jQuery.inArray(p, psArray);
-				 		itemTime = moment(""+site.messages[itemIndex].DATE+" "+site.messages[itemIndex].TIME+"");
-
-				 		// var months = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
-				 		// var selectedMonthName = months[itemTime.month()];
-
-				 		// $('#date').html(selectedMonthName +" "+ itemTime.date() +", "+ itemTime.year() +"");
-				 		// if(itemTime.hour() >= 12){
-				 		// 	period = 'pm';
-				 		// }else {
-				 		// 	period = 'am';
-				 		// }
-
-				 		// $('#time').html(((itemTime.hour() + 11) % 12 + 1) +":"+('0' + itemTime.minutes()).slice(-2) +" "+period+"");
-			        if (previousWaypoint) {
-			          $(previousWaypoint.element).addClass('np-previous')
-			        }
-			        if (nextWaypoint) {
-			          $(nextWaypoint.element).addClass('np-next')
-			        }
-			      },
-			      offset: '75%',
-			      group: classname
-			    })
-			  })
-			});
-  			document.body.scrollTop = document.documentElement.scrollTop = 0;
-			$('html,body').css('overflow-y','auto');
-			// $('#header').css('height','75%');
-			$('footer').css('height','auto');
-			$('.loading').animate({opacity: 0});
-		},
-		miscFunctions: function(){
-			$("#backToTop").click(function() {
-				$('html, body').stop();
-				$('html, body').css('overflow','hidden');
-				var scrollTop = $(document).scrollTop();
-				speed = (scrollTop-$(document).height())/2;
-				if(speed < 3000 || speed > 3000){
-					speed = 3000;
-				}
-				$("html, body").animate({ scrollTop: $(document).height() }, speed, function(){
-					$('html, body').css('overflow','auto');
-				});
-			  return false;
-			});
-			$("#details").click(function() {
-				if($('#about').hasClass('open')){
-					about.closeAbout();
-				}else{
-					about.showAbout();
-				}
-				return false;
-			});
-			$('.wrap').on('click',function(){
-				if($('#about').hasClass('open')){
-					about.closeAbout();
-				}
-			});
-		},
-	};
-	about = {
-		showAbout: function(){
-			$('#about').addClass('open');
-			// $('.wrap').addClass('hide');
-		},
-		closeAbout: function(){
-			$('#about').removeClass('open');
-			// $('.wrap').removeClass('hide');
-		}
-	};
-
-$(document).ready(function (){
-	setTimeout(function(){
-  		window.scrollTo(0,0);
-		site.init();
-	},1000)
-});
-
-$( window ).resize(function() {
-});
-
-})(window.jQuery);
-
-
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.0.min.js"><\/script>')</script>
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+        <script src="js/vendor/waypoints/jquery.waypoints.min.js"></script>
+        <script src="js/vendor/waypoints/shortcuts/infinite.min.js"></script>
+        <script src="js/vendor/linkify.js"></script>
+        <script src="js/vendor/moment.js"></script>
+        <script src="js/vendor/rangetouch.js"></script>
+        <script src="js/vendor/jquery-ui.js"></script>
+        <script src="js/vendor/dragdealer.js"></script>
+        <script src="js/vendor/tabletop.js"></script>
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+            e.src='//www.google-analytics.com/analytics.js';
+            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+            ga('create','UA-XXXXX-X');ga('send','pageview');
+        </script>
+    </body>
+</html>

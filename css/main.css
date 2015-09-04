@@ -119,7 +119,7 @@ h3 {
 }
 p {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-size: .85em;
+    font-size: .90em;
     font-style: normal;
     font-variant: normal;
     font-weight: 400;
@@ -186,6 +186,24 @@ a:hover {
         padding: 15px;
     }
 
+.all {
+
+}
+
+.all .loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -moz-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, 0);
+    color: #5AAFF9;
+    text-align: center;
+    font-style: italic;
+}
+
 #about {
     position: fixed;
     top: 50%;
@@ -193,8 +211,7 @@ a:hover {
     height: auto;
     right: -60%;
     padding: 3%;
-/*    margin-top: 150px;
-*/    z-index: 10;
+    z-index: 10;
     -moz-transform: translate(0%, -50%);
     -o-transform: translate(0%, -50%);
     -ms-transform: translate(0%, -50%);
@@ -209,6 +226,7 @@ a:hover {
     box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.05);
     padding-right: 25px;
     border: 1px solid #ededed;
+    opacity: .9;
     display: flex;
     display: -webkit-flex;
     -webkit-align-items: center;
@@ -256,20 +274,20 @@ a:hover {
 /* make the bottom fade out */
 }
 
-#date, #time {
+#date {
     text-align: center;
-    font-size: 13px;
-    color: #BBBBBB;
+    font-size: 14px;
+    color: #B0B0B0;
     font-weight: bold;
-    margin: 13px;
+    margin: 15px;
 }
 
 .text {
     border-radius: 10px;
     clear: both;
-    margin: 5px 10px 5px 10px;
+    margin: 10px;
     max-width: 80%;
-    padding: 5px 13px;
+    padding: 5px 15px;
     position: relative;
     width: 46%;
 }
@@ -288,21 +306,24 @@ a:hover {
     }
 
 .me {
-    background: #FFD3ED;
+    background: #FFC3E9;
     float: right;
     color: #fff;
+    right: 3%;
 }
 
 .optimism {
     background: #FFFFFF;
-    color: #5F5F5F;
+    color: #888888;
     float: left;
+    left: 3%;
 }
 
 .pessimism {
-    background: #5F5F5F;
+    background: #888888;
     color: #fff;
     float: left;
+    left: 3%;
 }
 
 

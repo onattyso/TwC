@@ -168,6 +168,13 @@ a:hover {
     margin: auto;
 }
 
+    #social {
+        float: left;
+        text-align: left;
+        padding: 15px;
+        color: #888888;
+    }
+
     #details {
         float: right;
         width: 10%;

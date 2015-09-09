@@ -129,7 +129,6 @@
                             $('.wrapper').append('<div class="'+side+' text"><p>'+copy+'</p></div>');
                             $('.message').last().children('p').linkify();
                         }
-                        $('.text').attr('data-after', time);
                     function parseMessage(){
                         author();
                         copy();

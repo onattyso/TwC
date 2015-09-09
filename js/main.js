@@ -106,7 +106,6 @@
             // };
 //////////////////////////////////
             function displayNext() {
-            console.log($('.message').length, site.messages.length);
             if($('.message').length < site.messages.length){
                 Waypoint.destroyAll()
                 // get the list element
@@ -122,12 +121,22 @@
 
                 $.each(messages.slice(index, index + messages.length), function(index, val) {
                     //index is the # object in the array
-                    console.log(index);
                         amount++;
                         parseMessage();
+                        last = $('.text').last();
+						lastDate = messages[last.index()];
                         if(author != 'none'){
-                            $('.wrapper').append('<div class="'+side+' text"><p>'+copy+'</p></div>');
+                            $('.wrapper').append('<div class="'+side+' text"><p>'+val.DATE+'<p><p>'+copy+'</p></div>');
                             $('.message').last().children('p').linkify();
+
+                            if(last.index()>0){
+                            	console.log(lastDate.DATE, val.DATE);
+	                            if(lastDate.DATE != val.DATE){
+								 	site.dayCount++;
+									newLast = $('div.text').last();
+									newLast.prepend('<span><img src="assets/img/days/day'+(site.dayCount+1)+'.svg" alt="day1" /></span>');
+								}
+							}
                         }
                     function parseMessage(){
                         author();
@@ -180,7 +189,6 @@
                     function time() {
                         timeRaw = JSON.stringify(val.TIME).replace(/[\\]n/g, '<br/>').replace(/\\/g, "");
                         time = timeRaw.substring(1, timeRaw.length-1);
-                        console.log(time);
                     };
                     function copy(){
                         copyRaw = JSON.stringify(val.COPY).replace(/[\\]n/g, '<br/>').replace(/\\/g, "");
@@ -203,7 +211,6 @@
             site.paddingBottom();
             $.each(['message'], function(i, classname) {
               var $elements = $('.' + classname);
-              console.log(classname);
               $elements.each(function() {
                 new Waypoint({
                   element: this,

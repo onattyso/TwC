@@ -119,7 +119,7 @@ h3 {
 }
 p {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-size: .90em;
+    font-size: .95em;
     font-style: normal;
     font-variant: normal;
     font-weight: 400;
@@ -144,7 +144,7 @@ pre {
 
 a {
     text-decoration: none;
-    color: #238FED;
+    color: #FCA8DD;
 }
 
 a:hover {
@@ -155,27 +155,23 @@ a:hover {
     position: fixed;
     top: 0px;
     z-index: 15;
-    background: #F8F8F8;
-    border-bottom: solid 1px #D2D2D2;
     width: 100%;
-    font-size: 18px;
     -webkit-transform-style: preserve-3d;
     -moz-transform-style: preserve-3d;
     transform-style: preserve-3d;
     cursor: pointer;
 }
 
-    #back {
-        float: left;
-        width: 10%;
-        color: #238FED;
-        padding: 15px;
-    }
+#top {
+    font-size: 18px;
+    width: 71%;
+    margin: auto;
+}
 
     #details {
         float: right;
         width: 10%;
-        color: #238FED;
+        color: #888888;
         padding: 15px;
         text-align: right;
     }
@@ -186,13 +182,18 @@ a:hover {
         padding: 15px;
     }
 
+    #contact img {
+
+    }
+
+
 .all {
 
 }
 
 .all .loading {
     position: absolute;
-    top: 50%;
+    top: 70%;
     left: 50%;
     -moz-transform: translate(-50%, -50%);
     -o-transform: translate(-50%, -50%);
@@ -258,12 +259,9 @@ a:hover {
 }
 
 #content {
-    margin-top: 100px;
+    margin-top: 35px;
     width: 100%;
-}
-
-#content div {
-
+    overflow: hidden;
 }
 
 #content div .assets {
@@ -285,47 +283,108 @@ a:hover {
 .text {
     border-radius: 10px;
     clear: both;
-    margin: 10px;
+    margin: 13px;
     max-width: 80%;
     padding: 5px 15px;
     position: relative;
-    width: 46%;
+    width: 33%;
 }
 
-    .text::after {
-        position: absolute;
-        bottom: 2px;
-        content: " ";
-        width: 30px;
-        height: 16px;
-        border-color: inherit;
+    .text::before {
+        border-radius: 50% 50% 50% 50%;
         border-style: solid;
-        border-radius: 50%;
-        border-width: 0 16px;
+        border-width: 0 20px;
+        bottom: 0;
+        clip: rect(20px, 35px, 42px, 0px);
+        content: " ";
+        height: 40px;
+        position: absolute;
+        right: -50px;
+        width: 30px;
         z-index: -1;
     }
 
+    .text::after {
+        position: absolute;
+        font-size: .8em;
+        color: #B0B0B0;
+        content: attr(data-after);
+        bottom: -21px;
+    }
+
 .me {
-    background: #FFC3E9;
+    background: #FCA8DD;
     float: right;
     color: #fff;
-    right: 3%;
+    right: 15%;
 }
+
+    .me::before {
+        color: #FCA8DD;
+    }
+
+    .me::after {
+        right: 5px;
+    }
 
 .optimism {
     background: #FFFFFF;
     color: #888888;
     float: left;
-    left: 3%;
+    left: 15%;
 }
+
+    .optimism::before {
+        left: -50px;
+        color: #FFFFFF;
+        -webkit-transform: rotateY(180deg);
+        -moz-transform: rotateY(180deg);
+        transform: rotateY(180deg);
+    }
+
+    .optimism::after {
+        left: 5px;
+    }
 
 .pessimism {
     background: #888888;
     color: #fff;
     float: left;
-    left: 3%;
+    left: 15%;
 }
 
+    .pessimism::before {
+        left: -50px;
+        color: #888888;
+        -webkit-transform: rotateY(180deg);
+        -moz-transform: rotateY(180deg);
+        transform: rotateY(180deg);
+    }
+
+    .pessimism::after {
+        left: 5px;
+    }
+
+#footer {
+    position: fixed;
+    z-index: 15;
+    background: #fff;
+    color: #888888;
+    opacity: .5;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    bottom: 0;
+    right: 40%;
+    width: 20%;
+    height: 25px;
+    text-align: center;
+    padding: 9px;
+    cursor: pointer;
+}
+
+#footer:hover {
+    opacity: 1;
+}
 
 .wrap {
   -webkit-transition: all 250ms ease-out;
@@ -455,7 +514,15 @@ a:hover {
         width: 100%;
         font-size: 3.2vw;
     }
-    
+
+    #contact img {
+        width: 100%;
+    }
+
+    #top {
+        width: 100%;
+    }
+
     #about {
         width: 90%;
         right: -110%;
@@ -464,6 +531,22 @@ a:hover {
     #about.open {
         right: 0%;
     }
+
+    .text {
+        width: 46%;
+    }
+
+        .me {
+            right: 3%;
+        }
+
+        .optimism {
+            left: 3%;
+        }
+
+        .pessimism {
+            left: 3%;
+        }
 
     #content div .assets {
     

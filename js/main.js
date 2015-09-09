@@ -123,18 +123,18 @@
                     //index is the # object in the array
                         amount++;
                         parseMessage();
-                        last = $('.text').last();
-						lastDate = messages[last.index()];
+                        var my_array = document.getElementsByClassName("text");
+						var last = my_array[my_array.length - 1];
+						lastDate = messages[parseInt($(last).index())-1];
                         if(author != 'none'){
                             $('.wrapper').append('<div class="'+side+' text"><p>'+val.DATE+'<p><p>'+copy+'</p></div>');
                             $('.message').last().children('p').linkify();
 
-                            if(last.index()>0){
-                            	console.log(lastDate.DATE, val.DATE);
+                            if($(last).index()>0){
 	                            if(lastDate.DATE != val.DATE){
 								 	site.dayCount++;
 									newLast = $('div.text').last();
-									newLast.prepend('<span><img src="assets/img/days/day'+(site.dayCount+1)+'.svg" alt="day1" /></span>');
+									newLast.prepend('<span>NewDay</span>');
 								}
 							}
                         }

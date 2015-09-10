@@ -54,7 +54,7 @@
             if(paddingBottom <= 50){
                 paddingBottom = 100
             }
-            // $('.wrapper>div').last().css('padding-bottom', '0px');
+            $('.wrapper>div').last().css('padding-bottom', '25px');
         },
         spreadsheet: function(){
             $.getJSON("js/messages.json", function(json) {
@@ -73,38 +73,20 @@
             // our variable holding starting index of this "page"
             var index = 0;
 
-            // currentDate();
             displayNext();
 
-            $("#facebook").click(function() {
-                if(navigator.userAgent.match('CriOS')){
-                    console.log('ios Chrome');
-                }else {
-                    FB.ui({
-                      method: 'share',
-                      href: 'http://textingwithcancer.com/',
-                    }, function(response){});
-                    return false;
-                }
-            });
+            // $("#facebook").click(function() {
+            //     if(navigator.userAgent.match('CriOS')){
+            //         console.log('ios Chrome');
+            //     }else {
+            //         FB.ui({
+            //           method: 'share',
+            //           href: 'http://textingwithcancer.com/',
+            //         }, function(response){});
+            //         return false;
+            //     }
+            // });
 
-            //function doesn't work yet
-            // function currentDate(){
-            //  $('.date').;
-                    // for (var i = 0; i < messages.length; i++) { 
-                    //  var previousDate = messages[i - 1].DATE;
-                    //  console.log(previousDate);
-
-                    //  if (messages.DATE[i] == previousDate) {
-                    //      console.log(messages.DATE + previousDate);
-                    //  }else{
-                    //      dateRaw = JSON.stringify(val.DATE).replace(/[\\]n/g, '<br/>').replace(/\\/g, "");
-                    //      date = dateRaw.substring(1, dateRaw.length-1);
-                    //      $('.wrapper').append('<div class="date"><p>'+date+'</p></div>');
-                    //  }
-                    // }
-            // };
-//////////////////////////////////
             function displayNext() {
             if($('.message').length < site.messages.length){
                 Waypoint.destroyAll()
@@ -124,25 +106,36 @@
                         amount++;
                         parseMessage();
                         var my_array = document.getElementsByClassName("text");
-						var last = my_array[my_array.length - 1];
-						lastDate = messages[parseInt($(last).index())-1];
+                        var last = my_array[my_array.length - 1];
+                        lastDate = messages[parseInt($(last).index())-1];
                         if(author != 'none'){
-                            $('.wrapper').append('<div class="'+side+' text"><p>'+val.DATE+'<p><p>'+copy+'</p></div>');
+                            $('.wrapper').append('<div class="'+side+' text"><p>'+copy+'</p></div>');
                             $('.message').last().children('p').linkify();
 
                             if($(last).index()>0){
-	                            if(lastDate.DATE != val.DATE){
-								 	site.dayCount++;
-									newLast = $('div.text').last();
-									newLast.prepend('<span>NewDay</span>');
-								}
-							}
+                                if(lastDate.DATE != val.DATE){
+                                    site.dayCount++;
+                                    newLast = $('div.text').last();
+                                    newLast.prepend('<span><div class ="date">'+val.DATE+'</div></span>');
+                                }
+                            }
                         }
+      //                   if($(last).index()>0){
+         //                    if(lastDate.DATE != val.DATE){
+                        //      site.dayCount++;
+                        //      newLast = $('div.text').last();
+                        //      newLast.prepend('<span><div id="date">'+val.DATE+'</div></span>');
+                        //  }
+                        //  if(lastDate.TIME !=val.TIME){
+                        //      site.dayCount++;
+                        //      $('.text').attr('data-after', val.TIME);
+                        //  }
+                        // }
+
                     function parseMessage(){
                         author();
                         copy();
                         time();
-                        assets();
                     };
                     function author(){
                         // set author per item
@@ -155,35 +148,6 @@
                         }else if(val.AUTHOR.substring(0,8) == 'negative'){
                             author = val.AUTHOR.substring(0,8);
                             side = 'pessimism'
-                        }
-                    };
-                    function assets(){
-                        if(val.ASSETS == ''){
-                            item_assets = false;
-                        }else{
-                            item_assets_raw = JSON.stringify(val.ASSETS).split(/[\\]n/g), parts = [];
-
-                            function makeUL(array) {
-                                // Create the list element:
-                                var list = document.createElement('ul');
-
-                                for(var i = 0; i < array.length; i++) {
-                                    // Create the list item:
-                                    var link = document.createElement('a');
-                                    link.href = '../img/'+array[i].replace(/\"/g, "");
-                                    link.target = '_blank';
-                                    var item = document.createElement('li');
-
-                                    // Set its contents:
-                                    item.appendChild(link).appendChild(document.createTextNode(array[i].replace(/\"/g, "")));
-
-                                    // Add it to the list:
-                                    list.appendChild(item);
-                                }
-                                // Finally, return the constructed list:
-                                return list;
-                            }
-                            item_assets = makeUL(item_assets_raw);
                         }
                     };
                     function time() {
